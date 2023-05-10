@@ -86,7 +86,7 @@ const Header = () => {
   const navigate = useNavigate();
   const handleToHome = () => navigate("/");
   const handleToDashboard = () => navigate("/dashboard");
-  const handleToSwap = () => navigate("/swap");
+
 
   const setContextWallet = async function (wallet: string) {
     try {
@@ -281,21 +281,16 @@ const Header = () => {
       <HStack spacing={8}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <Link onClick={handleToHome}>
-          <Box>Pioneer Template</Box>
+          <Box>Pioneer</Box>
         </Link>
         <HStack spacing={4} display={{ base: "none", md: "flex" }}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <Link onClick={handleToDashboard}>
-            <Text color="gray.500" fontSize="sm">
-              Dashboard
-            </Text>
-          </Link>
+          {/*<Link onClick={handleToDashboard}>*/}
+          {/*  <Text color="gray.500" fontSize="sm">*/}
+          {/*    Dashboard*/}
+          {/*  </Text>*/}
+          {/*</Link>*/}
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <Link onClick={handleToSwap}>
-            <Text color="gray.500" fontSize="sm">
-              Swap
-            </Text>
-          </Link>
         </HStack>
       </HStack>
       <Spacer />

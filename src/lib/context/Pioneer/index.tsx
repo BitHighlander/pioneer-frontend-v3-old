@@ -59,6 +59,8 @@ export enum WalletActions {
   // SET_WALLET_DESCRIPTIONS = "SET_WALLET_DESCRIPTIONS",
   // INIT_PIONEER = "INIT_PIONEER",
   SET_API = "SET_API",
+  SET_APP = "SET_APP",
+  SET_WALLET = "SET_WALLET",
   RESET_STATE = "RESET_STATE",
 }
 
@@ -76,6 +78,8 @@ export interface InitialState {
   // totalValueUsd: number;
   // app: any;
   user: any;
+  wallet: any;
+  app: any;
   api: any;
 }
 
@@ -93,6 +97,8 @@ const initialState: InitialState = {
   // totalValueUsd: 0,
   // app: {} as any,
   user: null,
+  wallet: null,
+  app: null,
   api: null,
 };
 
@@ -102,14 +108,17 @@ export interface IPioneerContext {
   context: string | null;
   status: string | null;
   // totalValueUsd: number | null;
-  // app: any;
   user: any;
+  wallet: any;
+  app: any;
   api: any;
 }
 
 export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
   | { type: WalletActions.SET_USERNAME; payload: string }
+  | { type: WalletActions.SET_WALLET; payload: any }
+  | { type: WalletActions.SET_APP; payload: any }
   | { type: WalletActions.SET_API; payload: any }
   | { type: WalletActions.SET_USER; payload: any }
   | { type: WalletActions.SET_CONTEXT; payload: any }
@@ -125,6 +134,10 @@ const reducer = (state: InitialState, action: ActionTypes) => {
       return { ...state, context: action.payload };
     case WalletActions.SET_USERNAME:
       return { ...state, username: action.payload };
+    case WalletActions.SET_WALLET:
+      return { ...state, wallet: action.payload };
+    case WalletActions.SET_APP:
+      return { ...state, app: action.payload };
     case WalletActions.SET_API:
       return { ...state, api: action.payload };
     case WalletActions.SET_USER:
@@ -258,6 +271,12 @@ export const PioneerProvider = ({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const api = await appInit.init(walletMetaMask);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      dispatch({ type: WalletActions.SET_WALLET, payload: walletMetaMask });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      dispatch({ type: WalletActions.SET_APP, payload: appInit });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       dispatch({ type: WalletActions.SET_API, payload: api });
